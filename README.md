@@ -100,48 +100,56 @@ _2021_
 
 ---
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
-| aws | n/a |
-| archive | n/a |
-| null | n/a |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12 |
+## Providers
 
+| Name | Version |
+|------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_null"></a> [null](#provider\_null) | n/a |
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| es\_endpoint | AWS ES FQDN e.g. search-es-demo-xxxxxxxxxx.us-east-1.es.amazonaws.com | `string` | n/a | yes |
-| delete\_after | Number of days of indices to preserve | `number` | `15` | no |
-| index | Index/indices to process using regex, except those matching `skip_index` | `string` | `".*"` | no |
-| index\_format | Combined with `index` to evaluate the index age from its name | `string` | `"%Y.%m.%d"` | no |
-| prefix | Prefix for resource names; allows multiple instances in one account | `string` | `""` | no |
-| python\_version | Lambda Python runtime version | `string` | `"3.6"` | no |
-| schedule | CloudWatch Events cron expression for the cleanup schedule | `string` | `"cron(0 3 * * ? *)"` | no |
-| security\_group\_ids | Additional security group IDs to attach to the Lambda (VPC deployments) | `list(string)` | `[]` | no |
-| skip\_index | Index/indices to always skip, matched by regex | `string` | `".kibana*"` | no |
-| subnet\_ids | Subnet IDs for VPC deployment; leave empty to run outside a VPC | `list(string)` | `[]` | no |
-| suffix | Suffix for resource names; allows multiple instances in one account | `string` | `""` | no |
-| tags | Tags to apply to all resources | `map` | `{"Name": "es-cleanup"}` | no |
-| timeout | Maximum Lambda execution time in seconds | `number` | `300` | no |
+| <a name="input_delete_after"></a> [delete\_after](#input\_delete\_after) | Numbers of days to preserve | `number` | `15` | no |
+| <a name="input_es_endpoint"></a> [es\_endpoint](#input\_es\_endpoint) | AWS ES FQDN e.g. search-es-demo-xxxxxxxxxx.eu-west-1.es.amazonaws.com | `string` | n/a | yes |
+| <a name="input_index"></a> [index](#input\_index) | Index/indices to process using regex, except the one matching `skip_index` regex | `string` | `".*"` | no |
+| <a name="input_index_format"></a> [index\_format](#input\_index\_format) | Combined with 'index' varible is used to evaluate the index age | `string` | `"%Y.%m.%d"` | no |
+| <a name="input_prefix"></a> [prefix](#input\_prefix) | A prefix for the resource names, this helps create multiple instances of this stack for different environments | `string` | `""` | no |
+| <a name="input_python_version"></a> [python\_version](#input\_python\_version) | Lambda Python version to be used | `string` | `"3.6"` | no |
+| <a name="input_schedule"></a> [schedule](#input\_schedule) | Cloudwatch Cron Schedule expression for running the cleanup function | `string` | `"cron(0 3 * * ? *)"` | no |
+| <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Addiational Security Ids To add. | `list(string)` | `[]` | no |
+| <a name="input_skip_index"></a> [skip\_index](#input\_skip\_index) | Index/indices to skip | `string` | `".kibana*"` | no |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | Subnet IDs you want to deploy the lambda in. Only fill this in if you want to deploy your Lambda function inside a VPC. | `list(string)` | `[]` | no |
+| <a name="input_suffix"></a> [suffix](#input\_suffix) | A suffix for the resource names, this helps create multiple instances of this stack for different environments | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply | `map` | <pre>{<br/>  "Name": "es-cleanup"<br/>}</pre> | no |
+| <a name="input_timeout"></a> [timeout](#input\_timeout) | Maximum lambda execution time | `number` | `300` | no |
 
-## Outputs
-
-None.
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| aws\_lambda\_function.es\_cleanup | resource |
-| aws\_iam\_role.role | resource |
-| aws\_iam\_policy.policy | resource |
-| aws\_iam\_role\_policy\_attachment.policy\_attachment | resource |
-| aws\_iam\_role\_policy\_attachment.policy\_attachment\_vpc | resource |
-| aws\_cloudwatch\_event\_rule.schedule | resource |
-| aws\_cloudwatch\_event\_target.es\_cleanup | resource |
-| aws\_lambda\_permission.allow\_cloudwatch | resource |
-| aws\_cloudwatch\_log\_group.cwlog | resource |
-| aws\_security\_group.lambda | resource |
+| [aws_cloudwatch_event_rule.schedule](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_rule) | resource |
+| [aws_cloudwatch_event_target.es_cleanup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_event_target) | resource |
+| [aws_cloudwatch_log_group.cwlog](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
+| [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.policy_attachment_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_lambda_function.es_cleanup](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
+| [aws_lambda_permission.allow_cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_security_group.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [archive_file.es_cleanup_lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
+| [aws_subnet.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
+| [null_data_source.lambda_file](https://registry.terraform.io/providers/hashicorp/null/latest/docs/data-sources/data_source) | data source |
+<!-- END_TF_DOCS -->
