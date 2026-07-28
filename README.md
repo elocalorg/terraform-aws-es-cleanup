@@ -6,6 +6,8 @@
 
 ## Status
 
+<ac:structured-macro ac:name="status"><ac:parameter ac:name="colour">Red</ac:parameter><ac:parameter ac:name="title">Deprecated</ac:parameter></ac:structured-macro>
+
 > ⚠️ **Deprecated** — targets Amazon Elasticsearch Service (AWS ES), which reached end-of-life and has been replaced by Amazon OpenSearch Service. A scan of 305 Terraform workspaces found zero active callers of this module. No new usage should be added. Existing callers should migrate to OpenSearch. No new features will be added; critical fixes only.
 
 ## Overview
