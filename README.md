@@ -1,4 +1,4 @@
-> **This page is auto-published to Confluence on each tag push.** Do not edit the Confluence page directly — changes will be overwritten. Make changes in the GitHub repository.
+> **This page is auto-published to Confluence on every push to `master` and on each tag push.** Do not edit the Confluence page directly — changes will be overwritten. Make changes in the GitHub repository.
 
 # terraform-aws-es-cleanup
 
@@ -6,9 +6,9 @@
 
 ## Status
 
-<ac:structured-macro ac:name="status"><ac:parameter ac:name="colour">Red</ac:parameter><ac:parameter ac:name="title">Deprecated</ac:parameter></ac:structured-macro>
+<ac:structured-macro ac:name="status"><ac:parameter ac:name="colour">Grey</ac:parameter><ac:parameter ac:name="title">Retired</ac:parameter></ac:structured-macro>
 
-> ⚠️ **Deprecated** — targets Amazon Elasticsearch Service (AWS ES), which reached end-of-life and has been replaced by Amazon OpenSearch Service. A scan of 305 Terraform workspaces found zero active callers of this module. No new usage should be added. Existing callers should migrate to OpenSearch. No new features will be added; critical fixes only.
+**Retired (November 2026)** — targets Amazon Elasticsearch Service, which is end-of-life, and no workspace or module uses this module. It has been removed from the Terraform module registry and the repository is archived. Do not use. See [DEVOPS-3841](https://elocal.atlassian.net/browse/DEVOPS-3841).
 
 ## Overview
 
